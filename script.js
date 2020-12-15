@@ -34,13 +34,19 @@ class Animal {
         this.name = name;
     }
 
-    action() {
+    action(e) {
+        e.stopPropagation();
         document.getElementById(this.actionSoundName).play();
+    }
+
+    showImage() {
+        document.querySelector("img").src = this.image;
     }
 
     putInTheDocument() {
         var petsTable = document.getElementById("petsTable");
         var petTR = document.createElement("tr");
+        petTR.className = "row";
 
         var petNameTD = document.createElement("td");
         petNameTD.textContent = this.name;
@@ -57,6 +63,7 @@ class Animal {
         petTR.appendChild(petActionTD);
 
         petActionTDButton.onclick = this.action.bind(this);
+        petTR.onclick = this.showImage.bind(this);
         petsTable.querySelector("tbody").appendChild(petTR)
     }
 }
@@ -77,6 +84,7 @@ class Cat extends Animal {
         this.legs = 4;
         this.actionText = "Meoow"
         this.actionSoundName = "meow"
+        this.image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnOrOwY43A2IXz1v0yLjmHVWj0d2_YMm_6eA&usqp=CAU"
     }
 }
 
@@ -95,6 +103,7 @@ class Monkey extends Animal {
         this.legs = 4;
         this.actionText = "Scream"
         this.actionSoundName = "scream"
+        this.image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMGQCLF0DfFgZ9qcAx9igf2CzzjIPSAOnMrA&usqp=CAU"
     }
 }
 
